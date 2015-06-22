@@ -1,0 +1,292 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>-- 誰把老娘的熱水關了! --</title>
+<style>
+	@font-face {
+		font-family: MyCustomFont;
+		src:
+		local("Microsoft JhengHei UI Bold"),
+		local("Microsoft JhengHei Bold"),
+		local("Microsoft YaHei"),
+		local("DFKai-SB");
+	}
+	* {
+		padding: 0;
+		margin: 0;
+		font-family: MyCustomFont;
+	}
+	body { margin: 20px;}
+	fieldset {
+		width:  500px;
+	}
+	legend {font-size: 20px}
+	label.field {
+		text-align: right;
+		width: 180px;
+		float: left;
+		font-weight: bold;
+	}
+	input.textbox-300 {
+		width: 300px;
+		float: left;
+	}
+	fieldset p {
+		clear: both;
+		padding: 5px;
+	}
+	.field {
+		padding: 0px 15px;
+		float:right;
+	}
+	div {
+	/*	display: block; */
+		display:-moz-box;
+		display:-webkit-box;
+		display:box;
+	}
+	canvas {
+		border: 1px solid blue;
+		padding: 5px;
+		margin: 20px;
+		border-style: dashed;
+	}
+	.loader {
+		position: fixed;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		height: 100%;
+		z-index: 9999;
+		background: url('http://bradsknutson.com/wp-content/uploads/2013/04/page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+	}
+	#show_small img {
+		margin: 2px;
+	}
+	.main01 {
+		width: 1024px;
+		margin: 30px auto;
+        }
+
+</style>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+ <script type="text/javascript">
+var image_url = "images/l4rEGIC.jpg";
+var word_color = "5C5C5C";
+var c_content = "誰把老娘的熱水關了!";
+ </script>
+</head>
+<body onLoad="drawImageX();">
+<div class="loader"></div>
+<script type="text/javascript">
+//  WebFontConfig = {
+//    google: { families: [ 'Amaranth:400,400italic:latin' ] }
+//  };
+//  (function() {
+//    var wf = document.createElement('script');
+//    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+//      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+//    wf.type = 'text/javascript';
+//    wf.async = 'true';
+//    var s = document.getElementsByTagName('script')[0];
+//    s.parentNode.insertBefore(wf, s);
+//    })();
+var thisurl = document.location.href;
+var url_content = thisurl.match(/#(.*)$/)?thisurl.match(/#(.*)$/)[1]:"";
+var base_url = thisurl.replace("#" + url_content, "");
+//console.log(url_content);
+//console.log(base_url);
+var Base64 = {_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+// Define the string
+//var string = 'Hello World!';
+
+// Encode the String
+//var encodedString = Base64.encode(string);
+//console.log(encodedString); // Outputs: "SGVsbG8gV29ybGQh"
+
+// Decode the String
+//var decodedString = Base64.decode(encodedString);
+//console.log(decodedString); // Outputs: "Hello World!"
+if(url_content != ""){
+	var url_old_content = Base64.decode(url_content);
+	var param_url = url_old_content.split("|", 5);
+//	console.log(param_url.length);
+	image_url = typeof param_url[3] !== 'undefined' ? param_url[3] : image_url;
+	word_color = typeof param_url[1] !== 'undefined' ? param_url[1] : word_color;
+	c_content = typeof param_url[0] !== 'undefined' ? param_url[0] : c_content;
+}
+</script>
+<script type="text/javascript" src="http://jscolor.com/example/jscolor/jscolor.js"></script>
+<script type="text/javascript">
+var allImage = [
+	'l4rEGIC.jpg',
+	'qwLkE2U.jpg',
+	'wkDNce4.jpg',
+	'g9hakdb.png',
+	'lR5TZKQ.jpg',
+	'mDdpn5E.jpg',
+]
+
+
+
+function drawImageX(text1) {
+	text1 = typeof text1 !== 'undefined' ? text1 : c_content;
+	var base_font_px = "36";
+	var font_family = "'MyCustomFont'";
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	canvas.width = document.getElementById("c_size").value;
+	img = new Image();
+	img.onload = function () {
+		canvas.height = canvas.width * (img.height / img.width);
+		ctx.drawImage(img, 0, 0, img.width * 1 * 1, img.height * 1 * 1,
+			0, 0, canvas.width, canvas.height);
+
+		if(document.getElementById('pregnant').checked) {
+			pimg = new Image();
+			pimg.src = 'images/XWZvZYy.png';
+			ctx.drawImage(pimg, 0, canvas.height - (canvas.height * 234 / 464),
+				canvas.width, canvas.height * 234 / 464);
+			}
+		///step 3
+		
+
+		ctx.strokeStyle = "white";
+		ctx.lineWidth = 2;
+		ctx.font = "" + base_font_px + "px " + font_family;
+		ctx.textAlign = 'center';
+		ctx.textBaseline = "bottom";
+		
+		var width_tmp = 0;
+		var lines = text1.split('\n');
+		for(i = 0; i <= ( lines.length -1 ); i++)
+		{
+//			console.log(lines[i]);
+//			console.log("width:" + ctx.measureText(lines[i]).width);
+			if (ctx.measureText(lines[i]).width > width_tmp)
+			{
+				width_tmp = ctx.measureText(lines[i]).width;
+			}
+		}
+//		console.log("max length: " + width_tmp);
+
+		if (width_tmp > (canvas.width * 0.8))
+		{
+			base_font_px = base_font_px * 0.8 * canvas.width / width_tmp;
+		}
+
+		if ( lines.length * base_font_px > (canvas.height * 0.4))
+		{
+			base_font_px = (canvas.height * 0.4) / lines.length;
+		}
+		ctx.font = parseInt(base_font_px) + "px " + font_family;
+		for(i = lines.length -1; i >= 0; i--)
+		{
+			ctx.strokeText(lines[i], canvas.width * 0.5, parseInt((canvas.height - ((lines.length - i - 1  ) * parseInt(base_font_px))) * 0.95));
+//			console.log("text: " + parseInt(lines[i]+" " + (lines.length -i ) + " " + (canvas.height - ((lines.length - i ) * parseInt(base_font_px))) * 0.95));
+			ctx.fillStyle = "#" + word_color;
+			ctx.fillText(lines[i], canvas.width * 0.5, parseInt((canvas.height - ((lines.length -i - 1) * parseInt(base_font_px))) * 0.95 + 1));
+		}
+
+/*
+		console.log("Canvas Width(80%): " + ( canvas.width ) * 0.8 );
+		console.log("Canvas Width: " + canvas.width);
+		console.log("Canvas Height: " + canvas.height);
+		console.log("Font Size: " + base_font_px);
+		console.log("ctx.font: " +ctx.font);
+*/
+	}
+	
+	img.src = image_url;
+	//img.crossOrigin = '';
+	document.getElementById('image_url').value = img.src;
+	var myPicker = new jscolor.color(document.getElementById('word_color'), {});
+	myPicker.fromString(word_color);
+	document.getElementById('goodword1').value = text1;
+	document.getElementsByTagName('title')[0].innerHTML = text1;
+	$(".loader").fadeOut("slow");
+	var new_url_content = document.getElementById('goodword1').value + "|" +
+	word_color + "|" + document.getElementById("c_size").value + "|" +
+	document.getElementById('image_url').value + "|" + document.getElementById('pregnant').checked;
+	console.log(new_url_content);
+	//console.log(Base64.encode(new_url_content));
+	//console.log(document.location.href);
+	document.location.href = base_url + "#" + Base64.encode(new_url_content);
+}
+
+
+</script>
+<div class="main01">
+    <canvas id="canvas">
+    </canvas>
+	<fieldset>
+		<legend>選項</legend>
+		<p><label class="field" for="CONTENT">內容:</label>
+			<textarea id="goodword1" onkeyup="drawImageX(this.value);return false;" autofocus="true" cols="30" rows="5"></textarea></p>
+		<p><label class="field" for="COLOR">文字用色:</label>
+			<input id="word_color" class="color" value="5c5c5c" onchange="word_color=this.value;drawImageX(document.getElementById('goodword1').value)"></P>
+		<p><label class="field" for="WIDTH">圖片寬度:</label>
+			<input type="range" id="c_size" min="120" max="540" step="30" value="210" onChange="drawImageX(document.getElementById('goodword1').value)"></p>
+		<p><label class="field" for="IMAGE">Custom Image URL:</label>
+<!--		<input type="url" id="image_url" onChange="image_url = this.value; drawImageX(document.getElementById('goodword1').value)">-->
+		<select id="image_url" onChange="image_url = this.value; drawImageX(document.getElementById('goodword1').value)">
+		</select>
+		</p>
+		<p>
+			<label class="field" for="SHOW_IMAGES"></label>
+			<div id="show_small" style="width: 470px; margin: 0px auto;"></div>
+		</p>
+		<p><label class="field" for="PREGNANT">Get pregnant:</label>
+			<input type="checkbox" id="pregnant" onChange="drawImageX(document.getElementById('goodword1').value)"></p>
+		<p><img src="http://i.imgur.com/VzR4i9b.gif" onclick="document.location.href = base_url;" /></p>
+	</fieldset>
+</div>
+<img src="images/XWZvZYy.png" width="1" height="1" border="0" />
+<script type="text/javascript">
+$( document ).ready(function() {
+	if(url_content != ""){
+		//image_url = typeof param_url[3] !== 'undefined' ? param_url[3] : image_url;
+		document.getElementById('c_size').value = typeof param_url[2] !== 'undefined' ? param_url[2] : document.getElementById('c_size').value;
+		if(typeof param_url[4] !== 'undefined' && param_url[4] == "false")
+		{
+			document.getElementById('pregnant').checked = false;
+		}else if(typeof param_url[4] !== 'undefined' && param_url[4] == "true"){
+			document.getElementById('pregnant').checked = true;
+		}
+	}
+	$.each(allImage, function(i, selImage){
+		console.log(i + ":" + selImage);
+		$('#image_url').append($('<option>', { 
+			value: document.location.href.substring(0, document.location.href.lastIndexOf('/')) + "/images/" + selImage,
+			text : document.location.href.substring(0, document.location.href.lastIndexOf('/')) + "/images/" + selImage 
+		}));
+	});
+
+	$('#image_url option').each(function(i){
+		//console.log("index:"+ i + " : " + $(this).val().replace(/\.(png|jpg)$/i, function myFunction(x){return "s" + x;}));
+		var elImg = $("<img src=\"" + $(this).val().replace(/\.(png|jpg)$/i, function myFunction(x){return "s" + x;}) + "\" alt=\"" +$(this).val()  + "\" />");
+		$('#show_small').append(elImg);
+		var alt = $(this).val();
+		elImg.click(function(e){
+			image_url = alt;
+			drawImageX(document.getElementById('goodword1').value);
+		});
+	});
+	$('#image_url').parent().hide();
+
+});
+
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-58517739-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
