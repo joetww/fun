@@ -42,6 +42,7 @@
 			if(count_down_limit > 0){
 				count_down_limit--;
 				countdown.text(count_down_limit);
+				messagebox_2.text('系統將於' + count_down_limit + '秒後自動關閉，並刪除所有未存檔資料。');
 			}else{
 				console.log(count_down_limit);
 				clearInterval(time_count);
