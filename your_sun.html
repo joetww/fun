@@ -1,0 +1,57 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>您的太陽能板</title>
+<meta name="viewport" content="width=device-width">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+	$( document ).ready(function() {
+		$('body').css('background', 'black');
+		var flashbox = $('<div />').appendTo('body');
+		flashbox.attr('id', 'flash').css({
+			'text-align':'center',
+			'width':'720px',
+			'margin-top':'5%',
+			'margin-left':'auto',
+			'margin-right':'auto',
+			'display':'block',
+			'font-family':'Microsoft JhengHei',
+			'font-size':'30px'
+		});
+		var msgcss = {
+			'text-align':'initial',
+			'color':'white'
+		};
+		var count_down_limit = 10;
+		var flashimg = $('<img />').appendTo(flashbox);
+		flashimg.attr('src','http://i.imgur.com/qVgp0Fk.png');
+		flashimg.css({'margin-left':'auto', 'margin-right':'auto'});
+		var messagebox_1 = $('<div />').appendTo(flashbox);
+		messagebox_1.css(msgcss)
+		.text('您的太陽能板失去陽光，即將終止供電。');
+		var messagebox_2 = $('<div />').appendTo(flashbox);
+		messagebox_2.css(msgcss)
+		.text('系統將於' + count_down_limit + '秒後自動關閉，並刪除所有未存檔資料。');
+		var countdown = $('<div />').appendTo(flashbox);
+		countdown.css({'text-align':'center', 'color':'white', 'font-size':'200px', 'font-family':'Consolas'})
+		.text(count_down_limit);
+		var messagebox_3 = $('<div />').appendTo(flashbox);
+		messagebox_3.css({'text-align':'center', 'color':'white'})
+		.text('有任何不滿請洽反核反火人士。');
+ 		var time_count = setInterval( function() {
+			if(count_down_limit > 0){
+				count_down_limit--;
+				countdown.text(count_down_limit);
+			}else{
+				console.log(count_down_limit);
+				clearInterval(time_count);
+				$('body').empty();
+			}
+		}, 1000);
+	});
+	
+</script>
+</head>
+<body>
+</body>
+</html>
