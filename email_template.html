@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Joe的常用信件樣本</title>
+	<link rel="stylesheet" media="screen,projection" href="http://ftp.isu.edu.tw/pub/Unix/Database/MySQL/common/css/theme_orange.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script>
+	var emailList = {
+		"wom_id": "Master Joe <joe_yue@gamemag.com.tw>; peter_chiang <peter_chiang@gamemag.com.tw>; WOM_ID@gamemag.com.tw; Jean Chen <jean_chen@gamemag.com.tw>",
+		"wom_jp": "Master Joe <joe_yue@gamemag.com.tw>; WOM_JP@gamemag.com.tw; Jean Chen <jean_chen@gamemag.com.tw>",
+		"wom_th": "Master Joe <joe_yue@gamemag.com.tw>; Dennis Liao <dennis_liao@gamemag.com.tw>; WOM_TH@gamemag.com.tw; Jean Chen <jean_chen@gamemag.com.tw>"
+	};
+	
+	function createMailBody(){
+		var d = new Date();
+		var subject = '[' + $('input[name=projectId]:checked').val().toUpperCase() + '] ';
+		var body_pre = 'Dear All\r\n\r\n';
+		var body_suf = 'Br, Joe\r\n\r\n';
+		var body = '\t';
+		subject = subject + d.toLocaleDateString() + ' ' + d.getHours() + ":" + d.getMinutes() + ' ' + $('input[name=maintainType]:checked').val() + ' ';
+		if($('input[name=isMaintain]:checked').val()){
+			subject = subject + "維護";
+		}
+		if($('input[name=isMaintain]:checked').val() && $('input[name=isVersionUpgrade]:checked').val() && $('input[name=theVersionUpgrade]').val().length > 0){
+			subject = subject + "&";
+		}
+		if($('input[name=isVersionUpgrade]:checked').val() && $('input[name=theVersionUpgrade]').val().length > 0){
+			subject = subject + "版本更新 ver " + $('input[name=theVersionUpgrade]').val();
+			body = '版更項目：' + $('input[name=theVersionUpgrade]').val() + '\r\n\r\n';
+		}else{
+			body = '沒有版更項目' + '\r\n\r\n';
+		}
+		body = subject + '\r\n\r\n' + body;
+		$("textarea[id='resultMailto']").val(subject + "\r\n--\r\n" + body_pre + body + body_suf);
+		$('#readyMail').attr("href", "mailto:" + encodeURIComponent($("textarea[name='theRecipients']").val()) + "?" + "subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body_pre + body + body_suf));
+		console.log(encodeURIComponent(subject));
+		console.log(encodeURIComponent(body_pre + body + body_suf));
+	}
+	$(document).ready(function(){
+		$("*[name='theVersionUpgrade']").hide();
+		$("input[name='projectId'][value='wom_th']").attr('checked',true);
+		$("textarea[name='theRecipients']").val(emailList[$('input[name=projectId]:checked').val()]);
+		$("textarea").width('40%').css('font-family', '"Lucida Console", Monaco, monospace');
+		$("input[name='theVersionUpgrade']").css('font-family', '"Lucida Console", Monaco, monospace');
+		$('input[name=isMaintain]').attr('checked',true);
+		
+		
+		$("input[name='projectId']").change(function(){
+			$("textarea[name='theRecipients']").val(emailList[$('input[name=projectId]:checked').val()]);
+		});
+		$("input[name='isVersionUpgrade']").change(function(){
+			if(this.checked){
+				$("*[name='theVersionUpgrade']").show();
+			}else{
+				$("*[name='theVersionUpgrade']").hide();
+			}
+		});
+		
+		
+		$("#ch_data input,textarea").bind("keyup change", function(){
+			createMailBody();
+		});
+		createMailBody();
+	});
+	</script>
+	<style type="text/css">
+		body {
+			background-color: #b0c4de;
+			padding: 30px;
+			text-align: left;
+			color: #fff;
+			font-size: 16px;
+		}
+		#ch_data {
+			display: block;
+		}
+	</style>
+</head>
+<body class="doc">
+
+<div id="ch_data">
+<input type="radio" name="projectId" value="wom_th">WOM 泰國
+<input type="radio" name="projectId" value="wom_id">WOM 印尼
+<input type="radio" name="projectId" value="wom_jp">WOM 日本
+
+<br />
+<textarea rows="4" wrap="hard" name="theRecipients"></textarea>
+<br />
+<!--<span>$('input[name=projectId]:checked').val();</span>
+<br />-->
+<div name="maintainType">
+<input type="radio" name="maintainType" value="外測站">外測站
+<input type="radio" name="maintainType" value="測試站" checked>測試站
+<input type="radio" name="maintainType" value="正式站">正式站
+</div>
+
+<!--<span>$('input[name=maintainType]:checked').val();</span>
+<br />-->
+<input type="checkbox" name="isMaintain">維護
+<input type="checkbox" name="isVersionUpgrade">版本更新
+<span name="theVersionUpgrade">版號：</span>
+<input type="text" name="theVersionUpgrade"><br />
+</div>
+
+<br />
+<textarea rows="16" wrap="hard" id="resultMailto"></textarea>
+<br />
+<a href="" id='readyMail' target="_blank">產生信件</a>
+<br />
+<br />
+<a href="mailto:Master Joe<joe_yue@gamemag.com.tw>?subject=[召喚]&body=%0D%0A%0D%0A--%0D%0A誠懇的信徒在此召換Master Joe%0D%0A獻上鮮美的＿＿＿＿作為祭品%0D%0A" target="_blank">招喚Master Joe</a>
+<!--	<a href="mailto:Jean Chen <kang0628@gmail.com>; Weijen_Cheng <Weijen_Cheng@gamemag.com.tw>; WOM_ID@gamemag.com.tw; peter_chiang <peter_chiang@gamemag.com.tw>; Master Joe<joe_yue@gamemag.com.tw>?subject=[WOM_ID]YYYYMMDD hhii 正式站/測試站 例行維護/版本更新&body=Dear All%0D%0A%0D%0A[WOM_ID]YYYYMMDD hhii 正式站/測試站 例行維護/版本更新%0D%0A沒有版更項目%0D%0A%0D%0ABr, Joe%0D%0A%0D%0A--%0D%0A%0D%0A" target="_blank">WOM_ID 更新回報</a>-->
+
+
+</body>
+
+</html>
