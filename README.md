@@ -8,3 +8,5 @@ theanswer.js    宇宙一切的答案
 your_sun.html   反火反核倒數計時
 
 image.html      Canvas作圖
+
+youtube_mpg123play.sh    免下載播放youtube播放列表
