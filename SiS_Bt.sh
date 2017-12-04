@@ -22,11 +22,10 @@ for i in $(echo "${THREADLIST}" | ${XMLLINT} --html --xpath '//span/a/@href' - 2
         echo "GoTo ${SISBASEURL}${i}"
         for j in $(echo "${CURL} \"${SISBASEURL}${i}\"" | bash | ${XMLLINT} --html --xpath '//a[contains(@href, "attachment.php")]/@href' - 2>/dev/null | sed -e 's/href=\"\([^"]\+\)\"/\1/'); do
                 echo "Get Torrent From: ${SISBASEURL}${j}"
-                FILENAME=$(echo "${CURL} -I \"${SISBASEURL}${j}\"" | bash | \
-                        iconv -f gbk -t utf8 | \
+                FILENAME=$(echo "${CURL} -I \"${SISBASEURL}${j}\"" | bash | iconv -f gbk -t utf8 | \
                         grep 'Content-Disposition: attachment; filename=' | \
-                        sed -e 's/Content-Disposition: attachment; filename="\([^"]\+\)"/\1/' |\
-                        | perl -pe 'chomp if eof' )
+                        sed -e 's/Content-Disposition: attachment; filename="\([^"]\+\)"/\1/' | \
+                        perl -pe 'chomp if eof' )
                 echo \"${FILENAME}\"
                 echo "${CURL} \"${SISBASEURL}${j}\" -o \"${TORRENTDOWNLOAD}/${FILENAME}\"" 
                 sleep $(( ( RANDOM % 2 )  + 1 ))
