@@ -24,7 +24,7 @@ for i in $(echo "${THREADLIST}" | ${XMLLINT} --html --xpath '//span/a/@href' - 2
                 echo "Get Torrent From: ${SISBASEURL}${j}"
                 FILENAME=$(echo "${CURL} -I \"${SISBASEURL}${j}\"" | bash | iconv -f gbk -t utf8 | \
                         grep 'Content-Disposition: attachment; filename=' | \
-                        sed -e 's/Content-Disposition: attachment; filename="\([^"]\+\)"/\1/' | \
+                        sed -e 's/Content-Disposition: attachment; filename="\([^"]\+\)"/\1/' | sed $'s/\r//' | \
                         perl -pe 'chomp if eof' )
                 echo \"${FILENAME}\"
                 echo "${CURL} \"${SISBASEURL}${j}\" -o \"${TORRENTDOWNLOAD}/${FILENAME}\"" 
