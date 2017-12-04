@@ -27,7 +27,7 @@ for i in $(echo "${THREADLIST}" | ${XMLLINT} --html --xpath '//span/a/@href' - 2
                         sed -e 's/Content-Disposition: attachment; filename="\([^"]\+\)"/\1/' | sed $'s/\r//' | \
                         perl -pe 'chomp if eof' )
                 echo \"${FILENAME}\"
-                echo "${CURL} \"${SISBASEURL}${j}\" -o \"${TORRENTDOWNLOAD}/${FILENAME}\"" 
+                echo "${CURL} \"${SISBASEURL}${j}\" -o \"${TORRENTDOWNLOAD}/${FILENAME}\"" | bash
                 sleep $(( ( RANDOM % 2 )  + 1 ))
         done
 done
