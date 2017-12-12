@@ -47,3 +47,4 @@ for i in $(echo "${THREADLIST}" | ${XMLLINT} --html --xpath '//span/a/@href' - 2
                 echo
         done
 done
+echo
