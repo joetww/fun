@@ -9,3 +9,19 @@ TRAMPOLINE
 export PATH="/usr/local/bin:/usr/bin"
 echo "Hello from $SHELL" $1
 /bin/ls -la /usr/bin/curl
+
+
+
+: <<TRAMPOLINE
+@echo off
+C:\cygwin\bin\bash -c "exit 0" || (echo.No bash found in PATH! & exit /b 1)
+setlocal EnableDelayedExpansion
+for %%i in (%*) do set _args= !_args! "%%~i"
+C:\cygwin\bin\bash -l "%~f0" "%CD%" %_args%
+goto :EOF 
+TRAMPOLINE
+#####################
+#!/bin/bash  -- it's traditional!
+cd "$1"
+shift
+echo Working from $PWD
