@@ -1,0 +1,11 @@
+:  <<TRAMPOLINE
+@echo off
+c:\cygwin64\bin\bash.exe -c "exit 0" || (echo.No bash found in PATH! & exit /b 1)
+c:\cygwin64\bin\bash.exe "%~f0" "%*" 
+goto :EOF 
+TRAMPOLINE
+#####################
+#!/bin/bash  -- it's traditional!
+export PATH="/usr/local/bin:/usr/bin"
+echo "Hello from $SHELL" $1
+/bin/ls -la /usr/bin/curl
