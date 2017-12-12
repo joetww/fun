@@ -18,21 +18,24 @@ mkdir -p ${TORRENTDOWNLOAD}
 
 sleep $(( ( RANDOM % 2 )  + 1 ))
 for ((i = 1; i <= PAGE; i++)); do
-        echo "Page: $i"
+        printf "%s ... " "Page: $i"
         THREADLIST=${THREADLIST}$(echo "${CURL} \"${SISURL}&page=${i}\"" | bash | ${XMLLINT} --html --xpath '//td[@class="nums" and contains(., "GB")]/..//span/a/..' - 2>/dev/null )
-        sleep $(( ( RANDOM % 2 )  + 1 ))
+        sleep $(( ( RANDOM % 20 )  + 1 ))
 done
-
-echo -e "${THREADLIST}" | iconv -f gbk -t utf8 | sed -e 's/<\/span><span/<\/span>\n<span/g'
+echo
+echo -e "${THREADLIST}" | sed -e 's/<\/span><span/<\/span><br \/><span/g' | iconv -f gbk -t utf8 | w3m -T text/html -o display_charset=UTF-8 -dump -cols 180
 for i in $(echo "${THREADLIST}" | ${XMLLINT} --html --xpath '//span/a/@href' - 2>/dev/null | sed -e 's/href=\"\([^"]\+\)\"/\1/g'); do
-        echo "GoTo ${SISBASEURL}${i}"
+        #echo "GoTo ${SISBASEURL}${i}"
         TID=$(echo ${i} | sed -e 's/.*?tid=\([0-9]\+\)&.*/\1/')
         #xxd.exe -p -l1 -s 452 SiSBt.dat
         LOCLCHECK=$(xxd -p -l1 -s $(expr $TID - $LOCKSHIFT) ${LOCKDB})
         if [ "${LOCLCHECK}" == "01" ]; then
+                printf .
                 continue
         fi
         for j in $(echo "${CURL} \"${SISBASEURL}${i}\"" | bash | ${XMLLINT} --html --xpath '//a[contains(@href, "attachment.php")]/@href' - 2>/dev/null | sed -e 's/href=\"\([^"]\+\)\"/\1/'); do
+                echo
+                echo "GoTo ${SISBASEURL}${i}"
                 echo "Get Torrent From: ${SISBASEURL}${j}"
                 FILENAME=$(echo "${CURL} -I \"${SISBASEURL}${j}\"" | bash | iconv -f gbk -t utf8 | \
                         grep 'Content-Disposition: attachment; filename=' | \
@@ -40,6 +43,7 @@ for i in $(echo "${THREADLIST}" | ${XMLLINT} --html --xpath '//span/a/@href' - 2
                         perl -pe 'chomp if eof' )
                 echo \"${FILENAME}\"
                 echo "${CURL} \"${SISBASEURL}${j}\" -o \"${TORRENTDOWNLOAD}/${FILENAME}\"" | bash && printf '\x01' | dd of=${LOCKDB} bs=1 seek=$(expr $TID - ${LOCKSHIFT}) count=1 conv=notrunc 1>/dev/null
-                sleep $(( ( RANDOM % 2 )  + 1 ))
+                sleep $(( ( RANDOM % 10 )  + 1 ))
+                echo
         done
 done
