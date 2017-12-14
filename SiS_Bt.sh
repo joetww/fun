@@ -35,7 +35,10 @@ for i in $(echo "${THREADLIST}" | ${XMLLINT} --html --xpath '//span/a/@href' - 2
         fi
         echo "GoTo ${SISBASEURL}${i}"
         THREADCONTAIN=$(echo "${CURL} \"${SISBASEURL}${i}\"" | bash)
-        echo -e "${THREADCONTAIN}" > ~/threadcontent.txt
+        if [ -z "${THREADCONTAIN}" ]; then
+                continue
+        fi
+        echo -e "${THREADCONTAIN}" | ${XMLLINT} --html --xpath '//*[@id="wrapper"]/div[1]/form/div[1]/h1/text()' - 2>/dev/null | iconv -f gbk -t utf8 | xargs
         for j in $(echo -e "${THREADCONTAIN}" | ${XMLLINT} --html --xpath '//a[contains(@href, "attachment.php")]/@href' - 2>/dev/null | sed -e 's/href=\"\([^"]\+\)\"/\1/'); do
                 echo
                 echo "Get Torrent From: ${SISBASEURL}${j}"
