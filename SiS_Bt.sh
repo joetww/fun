@@ -19,7 +19,7 @@ mkdir -p ${TORRENTDOWNLOAD}
 sleep $(( ( RANDOM % 2 )  + 1 ))
 for ((i = 1; i <= PAGE; i++)); do
         printf "%s ... " "Page: $i"
-        THREADLIST=${THREADLIST}$(echo "${CURL} \"${SISURL}&page=${i}\"" | bash | ${XMLLINT} --html --xpath '//td[@class="nums" and contains(., "GB")]/..//span/a/..' - 2>/dev/null )
+        THREADLIST=${THREADLIST}$(echo "${CURL} \"${SISURL}&page=${i}\"" | bash | ${XMLLINT} --html --xpath '//td[@class="nums" and contains(., "G")]/..//span/a/..' - 2>/dev/null )
         sleep $(( ( RANDOM % 20 )  + 1 ))
 done
 echo
