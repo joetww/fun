@@ -40,6 +40,7 @@ for i in $(echo "${THREADLIST}" | ${XMLLINT} --html --xpath '//span/a/@href' - 2
         if [ -z "${THREADTITLE}" ]; then
                 continue
         fi
+        echo "${THREADTITLE}"
         echo "GoTo ${SISBASEURL}${i}"
         for j in $(echo -e "${THREADCONTAIN}" | ${XMLLINT} --html --xpath '//a[contains(@href, "attachment.php")]/@href' - 2>/dev/null | sed -e 's/href=\"\([^"]\+\)\"/\1/'); do
                 echo
