@@ -24,6 +24,7 @@ for ((i = 1; i <= PAGE; i++)); do
         sleep $(( ( RANDOM % 20 )  + 1 ))
 done
 
+echo
 echo -e "$THREADLIST" | tr '\r\n' ' ' > x.log
 THREADFORMATLIST=$(echo $THREADLIST | tr '\r\n' ' ' | iconv -f gbk -t utf8 | sed -e 's@<span[^>]\+><a[^"]\+"\([^"]\+\)"[^>]*>\([^<]\+\)</a></span><td class="nums">\s*\([0-9.]\+\)\s*\([GM]\)[B]*[^<]\+</td>@"\1" "\2" \3 x\4x\n@ig' | sed -e 's@"\([^"]\+\)" "\([^"]\+\)" \([^\s]\+\) xGx@printf "\\"%s\\" \\"%s\\" %s" "\1" "\2" $(echo \"scale= 0; \3 * 1024 / 1\" | bc)@gie' -e 's@"\([^"]\+\)" "\([^"]\+\)" \([^\s]\+\) xMx@printf "\\"%s\\" \\"%s\\" %s" "\1" "\2" $(echo \"scale= 0; \3 * 1 / 1\" | bc)@gie')
 
