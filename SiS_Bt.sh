@@ -19,12 +19,19 @@ mkdir -p ${TORRENTDOWNLOAD}
 sleep $(( ( RANDOM % 2 )  + 1 ))
 for ((i = 1; i <= PAGE; i++)); do
         printf "%s ... " "Page: $i"
-        THREADLIST=${THREADLIST}$(echo "${CURL} \"${SISURL}&page=${i}\"" | bash | ${XMLLINT} --html --xpath '//td[@class="nums" and contains(., "G")]/..//span/a/..' - 2>/dev/null )
+        #THREADLIST=${THREADLIST}$(echo "${CURL} \"${SISURL}&page=${i}\"" | bash | ${XMLLINT} --html --xpath '//td[@class="nums" and contains(., "G")]/..//span/a/..' - 2>/dev/null )
+        THREADLIST=${THREADLIST}$(echo "${CURL} \"${SISURL}&page=${i}\"" | bash | ${XMLLINT} --html --xpath '//tbody[//td/@class="nums" and contains(string(@id), "normalthread_")]//td[./@class="nums"][2]|//tbody[//td/@class="nums" and contains(string(@id), "normalthread_")]//span[./a/@href]' - 2>/dev/null )
         sleep $(( ( RANDOM % 20 )  + 1 ))
 done
+
+echo -e "$THREADLIST" | tr '\r\n' ' ' > x.log
+THREADFORMATLIST=$(echo $THREADLIST | tr '\r\n' ' ' | iconv -f gbk -t utf8 | sed -e 's@<span[^>]\+><a[^"]\+"\([^"]\+\)"[^>]*>\([^<]\+\)</a></span><td class="nums">\s*\([0-9.]\+\)\s*\([GM]\)[B]*[^<]\+</td>@"\1" "\2" \3 x\4x\n@ig' | sed -e 's@"\([^"]\+\)" "\([^"]\+\)" \([^\s]\+\) xGx@printf "\\"%s\\" \\"%s\\" %s" "\1" "\2" $(echo \"scale= 0; \3 * 1024 / 1\" | bc)@gie' -e 's@"\([^"]\+\)" "\([^"]\+\)" \([^\s]\+\) xMx@printf "\\"%s\\" \\"%s\\" %s" "\1" "\2" $(echo \"scale= 0; \3 * 1 / 1\" | bc)@gie')
+
+echo -e "$THREADFORMATLIST" | awk 'BEGIN{FS="\""}{if($5>=600)printf("%5d\t%-70s\n", $5, $4)}' | sort
+#exit
 echo
-echo -e "${THREADLIST}" | sed -e 's/<\/span><span/<\/span><br \/><span/g' | iconv -f gbk -t utf8 | w3m -T text/html -o display_charset=UTF-8 -dump -cols 180
-for i in $(echo "${THREADLIST}" | ${XMLLINT} --html --xpath '//span/a/@href' - 2>/dev/null | sed -e 's/href=\"\([^"]\+\)\"/\1/g'); do
+#echo -e "${THREADLIST}" | sed -e 's/<\/span><span/<\/span><br \/><span/g' | iconv -f gbk -t utf8 | w3m -T text/html -o display_charset=UTF-8 -dump -cols 180
+for i in $(echo -e "$THREADFORMATLIST" | awk '{print $1}' | xargs); do
         #echo "GoTo ${SISBASEURL}${i}"
         TID=$(echo ${i} | sed -e 's/.*?tid=\([0-9]\+\)&.*/\1/')
         #xxd.exe -p -l1 -s 452 SiSBt.dat
