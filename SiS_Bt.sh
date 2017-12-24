@@ -28,11 +28,11 @@ echo
 echo -e "$THREADLIST" | tr '\r\n' ' ' > x.log
 THREADFORMATLIST=$(echo $THREADLIST | tr '\r\n' ' ' | iconv -f gbk -t utf8 | sed -e 's@<span[^>]\+><a[^"]\+"\([^"]\+\)"[^>]*>\([^<]\+\)</a></span><td class="nums">\s*\([0-9.]\+\)\s*\([GM]\)[B]*[^<]\+</td>@"\1" "\2" \3 x\4x\n@ig' | sed -e 's@"\([^"]\+\)" "\([^"]\+\)" \([^\s]\+\) xGx@printf "\\"%s\\" \\"%s\\" %s" "\1" "\2" $(echo \"scale= 0; \3 * 1024 / 1\" | bc)@gie' -e 's@"\([^"]\+\)" "\([^"]\+\)" \([^\s]\+\) xMx@printf "\\"%s\\" \\"%s\\" %s" "\1" "\2" $(echo \"scale= 0; \3 * 1 / 1\" | bc)@gie')
 
-echo -e "$THREADFORMATLIST" | awk 'BEGIN{FS="\""}{if($5>=600)printf("%5d\t%-70s\n", $5, $4)}' | sort
+echo -e "$THREADFORMATLIST" | awk 'BEGIN{FS="\""}{if($5>=800)printf("%5d\t%-70s\n", $5, $4)}' | sort
 #exit
 echo
 #echo -e "${THREADLIST}" | sed -e 's/<\/span><span/<\/span><br \/><span/g' | iconv -f gbk -t utf8 | w3m -T text/html -o display_charset=UTF-8 -dump -cols 180
-for i in $(echo -e "$THREADFORMATLIST" | awk 'BEGIN{FS="\""}{if($5>=1024)print $2}'); do
+for i in $(echo -e "$THREADFORMATLIST" | awk 'BEGIN{FS="\""}{if($5>=800)print $2}'); do
         #echo "GoTo ${SISBASEURL}${i}"
         TID=$(echo ${i} | sed -e 's/.*?tid=\([0-9]\+\)&.*/\1/')
         #xxd.exe -p -l1 -s 452 SiSBt.dat
