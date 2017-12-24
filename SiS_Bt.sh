@@ -32,7 +32,7 @@ echo -e "$THREADFORMATLIST" | awk 'BEGIN{FS="\""}{if($5>=600)printf("%5d\t%-70s\
 #exit
 echo
 #echo -e "${THREADLIST}" | sed -e 's/<\/span><span/<\/span><br \/><span/g' | iconv -f gbk -t utf8 | w3m -T text/html -o display_charset=UTF-8 -dump -cols 180
-for i in $(echo -e "$THREADFORMATLIST" | awk 'BEGIN{FS="\""}{if($5>=600)print $2}'); do
+for i in $(echo -e "$THREADFORMATLIST" | awk 'BEGIN{FS="\""}{if($5>=1024)print $2}'); do
         #echo "GoTo ${SISBASEURL}${i}"
         TID=$(echo ${i} | sed -e 's/.*?tid=\([0-9]\+\)&.*/\1/')
         #xxd.exe -p -l1 -s 452 SiSBt.dat
