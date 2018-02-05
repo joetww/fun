@@ -12,7 +12,8 @@ XMLLINT=$(which xmllint)
 FIRSTPAGE=$(echo "${CURL} \"${SISURL}\"" | bash | ${XMLLINT} --html --xpath '//html' - 2>/dev/null)
 VIEWTHREAD=$(echo ${FIRSTPAGE} | ${XMLLINT} --html --xpath '//*[@id="wrapper"]/div[1]/div[5]/div/em' - 2>/dev/null | sed -e 's/<em>&#160;\([0-9]\+\)&#160;<\/em>/\1/')
 THREADLIST=""
-PAGE=$(expr ${VIEWTHREAD} / 50 + 1)
+PAGE=$(expr ${VIEWTHREAD} / 50 + 1 2>/dev/null)
+PAGE=${PAGE:-1}
 mkdir -p ${TORRENTDOWNLOAD}
 [[ -f $LOCKDB ]] || dd if=/dev/zero of=$LOCKDB bs=1 count=$(expr 10 \* 1024 \* 1024)
 
