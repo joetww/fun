@@ -1,7 +1,7 @@
 function FindProxyForURL(url, host) {
 
     // use proxy for specific domains
-    if (shExpMatch(host, "119.31.176.99|vcsa.phtmachine.tk|*.google.com|*.facebook.com"))
+    if (shExpMatch(host, "vcsa.phtmachine.tk|*.google.com|*.facebook.com"))
     return "PROXY 192.168.99.166:8888";
     //if (isInNet(host, "119.31.176.99", "255.255.255.0"))
     //return "PROXY 192.168.99.166:8888";
