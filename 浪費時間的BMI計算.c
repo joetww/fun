@@ -1,6 +1,7 @@
 /*
-  我不想直接算出BMI
-  我只想列出計算式，再送給bash去找bc來算
+https://www.facebook.com/groups/1403852566495675/permalink/2814688275412090/
+我不想直接算出BMI
+我只想列出計算式，再送給bash去找bc來算
 
 $ ./main | bash
 Input Your Height: 182
