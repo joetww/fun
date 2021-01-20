@@ -1,7 +1,7 @@
 function FindProxyForURL(url, host) {
 
     // use proxy for specific domains
-    if (shExpMatch(host, "vcsa.phtmachine.tk|*.google.com|*.facebook.com|*.btbtt.me"))
+    if (shExpMatch(host, "vcsa.phtmachine.tk|www.cartoonmad.cc|*.google.com|*.facebook.com|*.btbtt.me"))
     return "PROXY 192.168.99.166:8888";
     
     // If the requested website is hosted within the internal network, send direct.
